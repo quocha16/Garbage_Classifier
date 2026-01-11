@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="light">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS VARIABLES & THEMES */
         :root {
             --primary: #10b981;
             --primary-dark: #059669;
@@ -19,14 +19,16 @@
             --border-color: #e5e7eb;
             --input-bg: #f9fafb;
             --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
-
-            --tag-blue-bg: #e0f2fe; --tag-blue-text: #0284c7;
-            --tag-green-bg: #dcfce7; --tag-green-text: #10b981;
-            --tag-red-bg: #fee2e2; --tag-red-text: #ef4444;
-            --tag-yellow-bg: #fef3c7; --tag-yellow-text: #f59e0b;
+            --tag-blue-bg: #e0f2fe;
+            --tag-blue-text: #0284c7;
+            --tag-green-bg: #dcfce7;
+            --tag-green-text: #10b981;
+            --tag-red-bg: #fee2e2;
+            --tag-red-text: #ef4444;
+            --tag-yellow-bg: #fef3c7;
+            --tag-yellow-text: #f59e0b;
         }
 
-        /* Dark Mode Override */
         [data-theme="dark"] {
             --bg-color: #111827;
             --card-bg: #1f2937;
@@ -35,42 +37,75 @@
             --border-color: #374151;
             --input-bg: #374151;
             --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
-
-            --tag-blue-bg: #0c4a6e; --tag-blue-text: #38bdf8;
-            --tag-green-bg: #064e3b; --tag-green-text: #34d399;
-            --tag-red-bg: #7f1d1d; --tag-red-text: #f87171;
-            --tag-yellow-bg: #78350f; --tag-yellow-text: #fbbf24;
+            --tag-blue-bg: #0c4a6e;
+            --tag-blue-text: #38bdf8;
+            --tag-green-bg: #064e3b;
+            --tag-green-text: #34d399;
+            --tag-red-bg: #7f1d1d;
+            --tag-red-text: #f87171;
+            --tag-yellow-bg: #78350f;
+            --tag-yellow-text: #fbbf24;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        .app-container { width: 100%; max-width: 1000px; position: relative; }
+        .app-container {
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+        }
 
-        /* DARK MODE TOGGLE BUTTON */
         .theme-toggle {
-            position: absolute; top: 0; right: 0;
-            background: var(--card-bg); border: 1px solid var(--border-color);
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             color: var(--text-main);
-            width: 40px; height: 40px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: var(--shadow);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
             font-size: 1.2rem;
+            z-index: 10;
         }
-        .theme-toggle:hover { transform: scale(1.1); }
 
-        /* Header */
-        header { text-align: center; margin-bottom: 40px; transition: all 0.5s ease; }
-        header h1 { color: var(--primary); font-size: 2.5rem; margin-bottom: 5px; }
-        header p { color: var(--text-sub); }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-        /* LAYOUT LOGIC */
+        header h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+
         .main-layout {
             display: flex;
             justify-content: center;
@@ -81,7 +116,6 @@
         .upload-panel {
             width: 100%;
             max-width: 500px;
-            transition: all 0.5s ease;
         }
 
         .main-layout.has-results {
@@ -89,135 +123,291 @@
             grid-template-columns: 1fr 1.3fr;
         }
 
-        .main-layout.has-results .upload-panel {
-            max-width: 100%;
-        }
-
-        /* Panel Style */
         .panel {
-            background: var(--card-bg); border-radius: 16px; padding: 30px;
-            box-shadow: var(--shadow); display: flex; flex-direction: column;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
             border: 1px solid var(--border-color);
         }
 
-        /* LEFT PANEL */
         .upload-area {
-            flex: 1; border: 3px dashed var(--border-color); border-radius: 12px;
-            display: flex; align-items: center; justify-content: center; flex-direction: column;
-            cursor: pointer; transition: all 0.3s; background: var(--input-bg);
-            min-height: 350px; margin-bottom: 25px; position: relative; overflow: hidden;
+            flex: 1;
+            border: 3px dashed var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            cursor: pointer;
+            background: var(--input-bg);
+            min-height: 350px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
         }
 
-        .upload-area:hover, .upload-area.drag-active {
-            border-color: var(--primary); background: rgba(16, 185, 129, 0.1);
+        .upload-area:hover,
+        .upload-area.drag-active {
+            border-color: var(--primary);
+            background: rgba(16, 185, 129, 0.1);
         }
 
-        .placeholder-view { text-align: center; color: var(--text-sub); pointer-events: none; transition: 0.3s;}
-        .placeholder-view i { font-size: 4rem; margin-bottom: 15px; color: var(--text-sub); opacity: 0.5; }
+        .placeholder-view {
+            text-align: center;
+            color: var(--text-sub);
+            transition: 0.3s;
+        }
 
         #imagePreview {
-            width: 100%; height: 100%; object-fit: contain;
-            position: absolute; top: 0; left: 0; display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
         }
 
-        .upload-area.has-image .placeholder-view { opacity: 0; }
-        .upload-area.has-image #imagePreview { display: block; }
+        .upload-area.has-image .placeholder-view {
+            opacity: 0;
+        }
+
+        .upload-area.has-image #imagePreview {
+            display: block;
+        }
 
         .btn-primary {
-            background: var(--primary); color: #fff; border: none;
-            padding: 16px; border-radius: 50px; font-size: 1.1rem; font-weight: 600;
-            cursor: pointer; transition: 0.3s; width: 100%;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-            display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
-        .btn-primary:disabled { background: var(--text-sub); cursor: wait; transform: none; }
 
-        /* RIGHT PANEL */
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
         .info-panel {
             display: none;
-            opacity: 0; transform: translateX(20px); transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.5s ease;
         }
 
         .main-layout.has-results .info-panel {
-            display: flex; opacity: 1; transform: translateX(0);
+            display: flex;
+            opacity: 1;
+            transform: translateX(0);
         }
 
-        .result-header { border-bottom: 2px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px; }
-        .garbage-name { font-size: 2.5rem; color: var(--text-main); margin: 5px 0; line-height: 1.2; }
-        .garbage-desc { color: var(--text-sub); font-size: 0.95rem; }
+        .result-header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
 
-        .properties-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+        .garbage-name {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+        }
+
+        .prob-container {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: var(--input-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .prob-container h3 {
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            color: var(--text-sub);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .prob-item {
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .prob-item:hover {
+            background: var(--border-color);
+        }
+
+        .prob-item.active {
+            border-left: 4px solid var(--primary);
+            background: rgba(20, 223, 158, 0.3);
+        }
+
+        .prob-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .prob-bar-bg {
+            background: var(--border-color);
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .prob-bar-fill {
+            background: var(--primary);
+            height: 100%;
+            width: 0;
+            transition: width 1s ease-out;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
 
         .prop-card {
-            display: flex; align-items: center; padding: 15px;
-            border-radius: 12px; background: var(--input-bg);
-            border: 1px solid var(--border-color); transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 12px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
         }
-        .prop-card:hover { transform: translateY(-3px); }
 
         .icon-box {
-            width: 45px; height: 45px; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem; margin-right: 15px; flex-shrink: 0;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            margin-right: 12px;
+            flex-shrink: 0;
         }
 
-        .text-box { display: flex; flex-direction: column; }
-        .text-box .label { font-size: 0.75rem; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.5px; }
-        .text-box .value { font-weight: 700; font-size: 1rem; color: var(--text-main); }
+        .text-box {
+            display: flex;
+            flex-direction: column;
+        }
 
-        /* Màu thẻ theo Theme */
-        .inorganic .icon-box { background: var(--tag-blue-bg); color: var(--tag-blue-text); }
-        .recyclable .icon-box { background: var(--tag-green-bg); color: var(--tag-green-text); }
-        .flammable .icon-box { background: var(--tag-red-bg); color: var(--tag-red-text); }
-        .time .icon-box { background: var(--tag-yellow-bg); color: var(--tag-yellow-text); }
+        .text-box .label {
+            font-size: 0.65rem;
+            color: var(--text-sub);
+            text-transform: uppercase;
+        }
+
+        .text-box .value {
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .inorganic .icon-box {
+            background: var(--tag-blue-bg);
+            color: var(--tag-blue-text);
+        }
+
+        .recyclable .icon-box {
+            background: var(--tag-green-bg);
+            color: var(--tag-green-text);
+        }
+
+        .flammable .icon-box {
+            background: var(--tag-red-bg);
+            color: var(--tag-red-text);
+        }
+
+        .time .icon-box {
+            background: var(--tag-yellow-bg);
+            color: var(--tag-yellow-text);
+        }
 
         .disposal-guide {
-            background: rgba(16, 185, 129, 0.1); padding: 20px; border-radius: 12px;
-            border-left: 5px solid var(--primary); margin-top: auto;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
         }
-        .disposal-guide h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--primary); }
-        .disposal-guide ul { padding-left: 20px; color: var(--text-main); }
-        .disposal-guide li { margin-bottom: 8px; }
+
+        .disposal-guide h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .disposal-guide ul {
+            padding-left: 18px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
 
         @media (max-width: 768px) {
-            .main-layout.has-results { grid-template-columns: 1fr; }
-            .garbage-name { font-size: 2rem; }
-            .properties-grid { grid-template-columns: 1fr; }
+            .main-layout.has-results {
+                grid-template-columns: 1fr;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="app-container">
-        <button class="theme-toggle" id="themeBtn" title="Toggle Dark Mode">
-            <i class="fas fa-moon"></i>
-        </button>
+        <button class="theme-toggle" id="themeBtn"><i class="fas fa-moon"></i></button>
 
         <header>
-            <h1><i class="fas fa-leaf"></i> Waste Classifier</h1>
+            <h1><i class="fas fa-recycle"></i> Waste Classifier</h1>
             <p>Upload an image to detect and learn how to dispose of waste properly.<br>
                 There is a high probability of errors, so please verify the returned result.<br>
-                Please refer to <a href="https://github.com/quocha16/Garbage_Classifier" target="_blank">Garbage Classifier</a> for more information about this project.
-            </p>
+                Please refer to <a href="https://github.com/quocha16/Garbage_Classifier" target="_blank">Garbage Classifier</a> for more information about this project.</p>
         </header>
 
         <main class="main-layout" id="mainLayout">
-
             <section class="panel upload-panel">
                 <div class="upload-area" id="uploadArea">
                     <div class="placeholder-view">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <h3>Drag & Drop or Click</h3>
-                        <p>Supports JPG, PNG, JPEG</p>
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 3.5rem; opacity: 0.3; margin-bottom: 10px;"></i>
+                        <h3>Click or Drag & Drop</h3>
+                        <p>JPG, PNG, JPEG</p>
                     </div>
-                    <img id="imagePreview" src="#" alt="Preview">
+                    <img id="imagePreview" src="#">
                 </div>
                 <input type="file" id="fileInput" accept="image/*" hidden>
-
-                <button class="btn-primary" id="analyzeBtn">
-                    Analyze <i class="fas fa-search"></i>
-                </button>
+                <button class="btn-primary" id="analyzeBtn">Analyze <i class="fas fa-search"></i></button>
             </section>
 
             <section class="panel info-panel" id="resultPanel">
@@ -226,34 +416,27 @@
                     <p class="garbage-desc" id="resDesc">--</p>
                 </div>
 
+                <div class="prob-container">
+                    <h3><i class="fas fa-chart-bar"></i> Prediction Results (Not correct? Select an alternative)</h3>
+                    <div id="top4List"></div>
+                </div>
+
                 <div class="properties-grid">
                     <div class="prop-card inorganic">
                         <div class="icon-box"><i class="fas fa-atom"></i></div>
-                        <div class="text-box">
-                            <span class="label">Material Type</span>
-                            <span class="value" id="resType">--</span>
-                        </div>
+                        <div class="text-box"><span class="label">Material</span><span class="value" id="resType">--</span></div>
                     </div>
                     <div class="prop-card recyclable">
                         <div class="icon-box"><i class="fas fa-recycle"></i></div>
-                        <div class="text-box">
-                            <span class="label">Recyclability</span>
-                            <span class="value" id="resRecycle">--</span>
-                        </div>
+                        <div class="text-box"><span class="label">Recycle</span><span class="value" id="resRecycle">--</span></div>
                     </div>
                     <div class="prop-card flammable">
                         <div class="icon-box"><i class="fas fa-fire"></i></div>
-                        <div class="text-box">
-                            <span class="label">Flammability</span>
-                            <span class="value" id="resFire">--</span>
-                        </div>
+                        <div class="text-box"><span class="label">Flammable</span><span class="value" id="resFire">--</span></div>
                     </div>
-                     <div class="prop-card time">
+                    <div class="prop-card time">
                         <div class="icon-box"><i class="fas fa-info-circle"></i></div>
-                        <div class="text-box">
-                            <span class="label">Action</span>
-                            <span class="value" id="resActionShort">--</span>
-                        </div>
+                        <div class="text-box"><span class="label">Action</span><span class="value" id="resActionShort">--</span></div>
                     </div>
                 </div>
 
@@ -269,56 +452,16 @@
 
     <script>
         const garbageInfo = {
-            'battery': {
-                type: 'Hazardous', recycle: 'Special', fire: 'YES (Explosive)',
-                desc: 'AA, AAA, Lithium-ion batteries.',
-                action: 'DO NOT put in normal bin. Tape ends and take to E-waste drop-off.'
-            },
-            'biological': {
-                type: 'Organic', recycle: 'Compost', fire: 'No',
-                desc: 'Food scraps, fruit peels, garden waste.',
-                action: 'Use for composting or place in organic waste bin.'
-            },
-            'cardboard': {
-                type: 'Organic', recycle: 'High', fire: 'Yes',
-                desc: 'Shipping boxes, packaging materials.',
-                action: 'Flatten boxes. Keep dry. Place in paper/recycling bin.'
-            },
-            'clothes': {
-                type: 'Fabric', recycle: 'Medium', fire: 'Yes',
-                desc: 'Old shirts, pants, textile scraps.',
-                action: 'Donate if wearable. Use textile recycling services if torn.'
-            },
-            'glass': {
-                type: 'Inorganic', recycle: 'High (Infinite)', fire: 'No',
-                desc: 'Bottles, jars (any color), broken glass.',
-                action: 'Rinse carefully. Remove lids. Place in Glass recycling bin.'
-            },
-            'metal': {
-                type: 'Inorganic', recycle: 'High', fire: 'No',
-                desc: 'Aluminum cans, foil, steel scraps.',
-                action: 'Rinse clean. Squeeze to save space. Place in Metal recycling bin.'
-            },
-            'paper': {
-                type: 'Organic', recycle: 'High', fire: 'Yes',
-                desc: 'Newspapers, office paper, magazines.',
-                action: 'Keep dry. Remove plastic covers/staples. Place in Paper bin.'
-            },
-            'plastic': {
-                type: 'Inorganic', recycle: 'Medium', fire: 'Yes',
-                desc: 'PET bottles, containers, wrappers.',
-                action: 'Check resin code (1-7). Rinse clean and recycle.'
-            },
-            'shoes': {
-                type: 'Mixed', recycle: 'Low', fire: 'Yes',
-                desc: 'Sneakers, leather shoes, rubber footwear.',
-                action: 'Donate to charity if good. Trash bin if worn out.'
-            },
-            'trash': {
-                type: 'Mixed', recycle: 'None', fire: 'Varies',
-                desc: 'Non-recyclable waste, wrappers, styrofoam.',
-                action: 'Place in General Waste bin (Landfill). Do not recycle.'
-            }
+            'battery': { type: 'Hazardous', recycle: 'Special', fire: 'Yes', desc: 'AA, AAA, Lithium-ion batteries contain heavy metals.', action: 'DO NOT put in normal bin. Tape ends and take to E-waste drop-off.' },
+            'biological': { type: 'Organic', recycle: 'Compost', fire: 'No', desc: 'Food scraps, fruit peels, garden waste.', action: 'Use for composting or place in Organic waste bin.' },
+            'cardboard': { type: 'Organic', recycle: 'High', fire: 'Yes', desc: 'Shipping boxes, packaging materials.', action: 'Flatten boxes. Keep dry. Place in Paper/Recycling bin.' },
+            'clothes': { type: 'Fabric', recycle: 'Medium', fire: 'Yes', desc: 'Shirts, pants, textile scraps.', action: 'Donate if wearable. Use textile recycling services if torn.' },
+            'glass': { type: 'Inorganic', recycle: 'Infinite', fire: 'No', desc: 'Bottles, jars, broken glass.', action: 'Rinse carefully. Remove lids. Place in Glass recycling bin.' },
+            'metal': { type: 'Inorganic', recycle: 'High', fire: 'No', desc: 'Aluminum cans, foil, steel scraps.', action: 'Squeeze to save space. Place in Metal recycling bin or sell it for scrap if possible.' },
+            'paper': { type: 'Organic', recycle: 'High', fire: 'Yes', desc: 'Newspapers, office paper, magazines.', action: 'Keep dry. Remove plastic covers/staples. Place in Paper/Recycling bin or sell as scrap paper if possible.' },
+            'plastic': { type: 'Inorganic', recycle: 'Medium', fire: 'Yes', desc: 'PET bottles, containers, wrappers.', action: 'Check resin code (1-7). Rinse clean and recycle or place in Plastic bin.' },
+            'shoes': { type: 'Mixed', recycle: 'Low', fire: 'Yes', desc: 'Sneakers, leather shoes, rubber footwear.', action: 'Donate to charity if good. Place in Inorganic bin if worn out.' },
+            'trash': { type: 'Mixed', recycle: 'None', fire: 'Varies', desc: 'Non-recyclable waste, face mask, wrappers, styrofoam.', action: 'Place in Inorganic bin. Do not recycle.' }
         };
 
         const fileInput = document.getElementById('fileInput');
@@ -327,38 +470,33 @@
         const analyzeBtn = document.getElementById('analyzeBtn');
         const mainLayout = document.getElementById('mainLayout');
         const themeBtn = document.getElementById('themeBtn');
+        const top4List = document.getElementById('top4List');
+        const htmlElement = document.documentElement;
 
-        let selectedFile = null;
+        // --- Theme Management ---
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        applyTheme(savedTheme);
 
-        // DARK MODE LOGIC
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        function applyTheme(theme) {
+            htmlElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeBtn.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         }
 
         themeBtn.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
-            }
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
         });
+        // -------------------------
 
-        // UPLOAD HANDLER
+        let selectedFile = null;
+
         uploadArea.addEventListener('click', () => fileInput.click());
-
-        fileInput.addEventListener('change', function() {
-            if (this.files[0]) handleFile(this.files[0]);
-        });
-
-        uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('drag-active'); });
-        uploadArea.addEventListener('dragleave', () => { uploadArea.classList.remove('drag-active'); });
-        uploadArea.addEventListener('drop', (e) => {
+        fileInput.addEventListener('change', e => { if (e.target.files[0]) handleFile(e.target.files[0]); });
+        uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-active'); });
+        uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-active'));
+        uploadArea.addEventListener('drop', e => {
             e.preventDefault(); uploadArea.classList.remove('drag-active');
             if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
         });
@@ -366,68 +504,81 @@
         function handleFile(file) {
             selectedFile = file;
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = e => {
                 imagePreview.src = e.target.result;
                 uploadArea.classList.add('has-image');
-                mainLayout.classList.remove('has-results'); // Reset giao diện
-            }
+                mainLayout.classList.remove('has-results');
+            };
             reader.readAsDataURL(file);
         }
 
-        // PREDICTION LOGIC
-        analyzeBtn.addEventListener('click', () => {
-            if (!selectedFile) {
-                alert("Please select an image first!");
-                return;
-            }
+        function updateDisplayInfo(label) {
+            const labelKey = label.toLowerCase().trim();
+            const info = garbageInfo[labelKey] || { type: 'Unknown', recycle: 'Unknown', fire: 'Unknown', desc: '--', action: '--' };
 
+            document.getElementById('resLabel').textContent = label.toUpperCase();
+            document.getElementById('resDesc').textContent = info.desc;
+            document.getElementById('resType').textContent = info.type;
+            document.getElementById('resRecycle').textContent = info.recycle;
+            document.getElementById('resFire').textContent = info.fire;
+            document.getElementById('resActionShort').textContent = "See Guide";
+            document.getElementById('resActionList').innerHTML = `<li>${info.action}</li>`;
+
+            document.querySelectorAll('.prob-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.label.toLowerCase() === labelKey) item.classList.add('active');
+            });
+        }
+
+        analyzeBtn.addEventListener('click', () => {
+            if (!selectedFile) return alert("Please select an image first!");
             const formData = new FormData();
             formData.append('file', selectedFile);
-
-            const originalText = analyzeBtn.innerHTML;
             analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
             analyzeBtn.disabled = true;
 
-            fetch('/predict', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                analyzeBtn.innerHTML = originalText;
-                analyzeBtn.disabled = false;
+            fetch('/predict', { method: 'POST', body: formData })
+                .then(res => res.json())
+                .then(data => {
+                    analyzeBtn.innerHTML = 'Analyze <i class="fas fa-search"></i>';
+                    analyzeBtn.disabled = false;
+                    if (data.error) return alert(data.error);
 
-                if (data.error) {
-                    alert("Error: " + data.error);
-                } else {
-                    const labelKey = data.prediction.toLowerCase().trim();
+                    updateDisplayInfo(data.prediction);
 
-                    const info = garbageInfo[labelKey] || {
-                        type: 'Unknown', recycle: 'Unknown', fire: 'Unknown',
-                        desc: 'No info available for this item.',
-                        action: 'Please check your local waste guidelines.'
-                    };
+                    top4List.innerHTML = '';
+                    if (data.top_4) {
+                        data.top_4.forEach((item, index) => {
+                            const div = document.createElement('div');
+                            div.className = 'prob-item' + (index === 0 ? ' active' : '');
+                            div.dataset.label = item.label;
 
-                    // Update UI
-                    document.getElementById('resLabel').textContent = data.prediction.toUpperCase();
-                    document.getElementById('resDesc').textContent = info.desc;
-                    document.getElementById('resType').textContent = info.type;
-                    document.getElementById('resRecycle').textContent = info.recycle;
-                    document.getElementById('resFire').textContent = info.fire;
-                    document.getElementById('resActionShort').textContent = "See Guide";
-                    document.getElementById('resActionList').innerHTML = `<li>${info.action}</li>`;
+                            div.innerHTML = `
+                            <div class="prob-label">
+                                <span>${item.label.toUpperCase()}</span>
+                                <span>${item.confidence}%</span>
+                            </div>
+                            <div class="prob-bar-bg">
+                                <div class="prob-bar-fill" style="width: ${item.confidence}%"></div>
+                            </div>
+                        `;
 
+                            div.addEventListener('click', () => {
+                                updateDisplayInfo(item.label);
+                            });
+
+                            top4List.appendChild(div);
+                        });
+                    }
                     mainLayout.classList.add('has-results');
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                analyzeBtn.innerHTML = originalText;
-                analyzeBtn.disabled = false;
-                alert("Cannot connect to server!");
-            });
+                })
+                .catch(() => {
+                    analyzeBtn.disabled = false;
+                    analyzeBtn.innerHTML = 'Analyze <i class="fas fa-search"></i>';
+                    alert("Connection error!");
+                });
         });
     </script>
-
 </body>
+
 </html>

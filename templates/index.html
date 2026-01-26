@@ -417,8 +417,8 @@
                 </div>
 
                 <div class="prob-container">
-                    <h3><i class="fas fa-chart-bar"></i> Prediction Results (Not correct? Select an alternative)</h3>
-                    <div id="top4List"></div>
+                    <h3><i class="fas fa-chart-bar"></i> Prediction Results (Click to choose another if the return result is not correct)</h3>
+                    <div id="top3List"></div>
                 </div>
 
                 <div class="properties-grid">
@@ -470,7 +470,7 @@
         const analyzeBtn = document.getElementById('analyzeBtn');
         const mainLayout = document.getElementById('mainLayout');
         const themeBtn = document.getElementById('themeBtn');
-        const top4List = document.getElementById('top4List');
+        const topListContainer = document.getElementById('top3List');
         const htmlElement = document.documentElement;
 
         // --- Theme Management ---
@@ -546,9 +546,9 @@
 
                     updateDisplayInfo(data.prediction);
 
-                    top4List.innerHTML = '';
-                    if (data.top_4) {
-                        data.top_4.forEach((item, index) => {
+                    topListContainer.innerHTML = '';
+                    if (data.top_3) {
+                        data.top_3.forEach((item, index) => {
                             const div = document.createElement('div');
                             div.className = 'prob-item' + (index === 0 ? ' active' : '');
                             div.dataset.label = item.label;
@@ -567,7 +567,7 @@
                                 updateDisplayInfo(item.label);
                             });
 
-                            top4List.appendChild(div);
+                            topListContainer.appendChild(div);
                         });
                     }
                     mainLayout.classList.add('has-results');

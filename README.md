@@ -1,24 +1,21 @@
-# Garbage Classifier using Machine Learning only
+# Garbage Classifier using Machine Learning method
 
 This project is a Machine Learning implementation designed to explore computer vision techniques and apply them to the real-world problem of waste classification.
 
 ## Overview
 
-The primary goal of this project is to bridge the gap between theoretical Machine Learning concepts and practical application. Instead of using pre-trained Deep Learning models, this project constructs a classification pipeline from scratch using classical algorithms to understand the underlying mechanics of feature extraction and image classification.
-
+The primary goal of this project is to bridge the gap between theoretical Machine Learning concepts and practical application. Instead of using pre-trained Deep Learning models, this project constructs a classification pipeline from scratch using classical algorithms.
 The project helps users identify the disposal category of waste items and how to dispose of them properly. While the current model serves as a fundamental proof-of-concept, it demonstrates the potential of applying code to environmental challenges.
 
 **Current Performance:**
-- **Training Accuracy:** ~65%
-- **Testing Accuracy:** ~54%
-> ***Note on Development:** This project adopts a modern AI-augmented development workflow. While the algorithms and model pipeline were manually implemented for educational purposes, to prioritize the core Machine Learning algorithms, the web interface was developed using rapid prototyping techniques.
+- **Testing Accuracy:** ~62%
+> ***Note on Development:** This project adopts a modern AI-augmented development workflow. While the algorithms and model pipeline were manually implemented for learning purposes, to prioritize the core Machine Learning algorithms, the web interface was developed using rapid prototyping techniques.
 Website link in Web Interface Usage section.*
 
 ## Features
 
 This project moves away from "Black Box" deep learning to use explicit feature extraction and classical classification methods:
 
-- **Image Preprocessing**: Resizes and normalizes images to ensure consistency and reduce noise before processing.
 - **Color Histogram:** Extracts color distribution features to distinguish objects based on their color profiles.
 - **Bag of Visual Words (BoW):** Adapts NLP concepts to computer vision by treating image features as "words" to create frequency histograms.
 - **K-Means Clustering:** Used within the BoW model to cluster descriptors and construct a "visual vocabulary."
@@ -46,9 +43,9 @@ garbage-dataset/
 ## Limitations
 
 Given the use of classical ML techniques on a complex dataset, the current accuracy reflects the challenges of the approach:
-1.  **Low Accuracy:** The model currently achieves ~54% on unseen data, indicating room for improvement in feature engineering.
+1.  **Low Accuracy:** The model currently achieves ~62% on unseen data, indicating room for improvement in feature engineering.
 2.  **Background Sensitivity:** The algorithms are sensitive to cluttered backgrounds and lighting variations.
-3.  **Feature Limit:** Hand-crafted features (Color Histograms, BoW) may not capture high-level semantic details as effectively as CNNs.
+3.  **Feature Limit:** Hand-crafted features (Color Histograms, BoW) may not capture high-level semantic details as effectively as DL methods.
 4.  **Algorithm Limit:** The model is strictly limited to classifying items into the specific categories defined in the training dataset. It does not perform object detection (to locate the object) and **cannot distinguish between "trash" and "non-trash" objects**. If an undefined item is uploaded, the model will force a prediction into one of the known classes based on mathematical probability.
 
 ## Web Interface Usage
@@ -58,7 +55,7 @@ Given the use of classical ML techniques on a complex dataset, the current accur
 2.  Drag and drop an image, or click to upload.
 3.  Click **"Analyze"**
 4.  Wait for the processing pipeline to finish.
-5.  View the classification result.
+5.  View the result (Users can select an alternative prediction if the current result is incorrect, as the system provides the top 3 probabilities).
 
 ## Requirements
 

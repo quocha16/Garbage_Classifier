@@ -8,7 +8,7 @@ The primary goal of this project is to bridge the gap between theoretical Machin
 The project helps users identify the disposal category of waste items and how to dispose of them properly. While the current model serves as a fundamental proof-of-concept, it demonstrates the potential of applying code to environmental challenges.
 
 **Current Performance:**
-- **Testing Accuracy:** ~6060%
+- **Testing Accuracy:** ~60%
 > ***Note on Development:** This project adopts a modern AI-augmented development workflow. While the algorithms and model pipeline were manually implemented for learning purposes, to prioritize the core Machine Learning algorithms, the web interface was developed using rapid prototyping techniques.
 Website link in Web Interface Usage section.*
 

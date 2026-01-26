@@ -1,4 +1,4 @@
-# Garbage Classifier using Machine Learning method
+# Garbage Classifier using Machine Learning methods
 
 This project is a Machine Learning implementation designed to explore computer vision techniques and apply them to the real-world problem of waste classification.
 

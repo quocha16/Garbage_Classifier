@@ -8,7 +8,7 @@ The primary goal of this project is to bridge the gap between theoretical Machin
 The project helps users identify the disposal category of waste items and how to dispose of them properly. While the current model serves as a fundamental proof-of-concept, it demonstrates the potential of applying code to environmental challenges.
 
 **Current Performance:**
-- **Testing Accuracy:** ~62%
+- **Testing Accuracy:** ~6060%
 > ***Note on Development:** This project adopts a modern AI-augmented development workflow. While the algorithms and model pipeline were manually implemented for learning purposes, to prioritize the core Machine Learning algorithms, the web interface was developed using rapid prototyping techniques.
 Website link in Web Interface Usage section.*
 
@@ -43,7 +43,7 @@ garbage-dataset/
 ## Limitations
 
 Given the use of classical ML techniques on a complex dataset, the current accuracy reflects the challenges of the approach:
-1.  **Low Accuracy:** The model currently achieves ~62% on unseen data, indicating room for improvement in feature engineering.
+1.  **Low Accuracy:** The model currently achieves ~60% on unseen data, indicating room for improvement in feature engineering.
 2.  **Background Sensitivity:** The algorithms are sensitive to cluttered backgrounds and lighting variations.
 3.  **Feature Limit:** Hand-crafted features (Color Histograms, BoW) may not capture high-level semantic details as effectively as DL methods.
 4.  **Algorithm Limit:** The model is strictly limited to classifying items into the specific categories defined in the training dataset. It does not perform object detection (to locate the object) and **cannot distinguish between "trash" and "non-trash" objects**. If an undefined item is uploaded, the model will force a prediction into one of the known classes based on mathematical probability.

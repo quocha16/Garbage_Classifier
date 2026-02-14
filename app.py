@@ -34,13 +34,34 @@ scaler_model = None
 
 try:
     svm_model = joblib.load(os.path.join(BASE_PATH, "svm_garbage_model.pkl"))
-    pca_model = joblib.load(os.path.join(BASE_PATH, "pca_garbage_model.pkl"))
-    le_model = joblib.load(os.path.join(BASE_PATH, "le_garbage_model.pkl"))
-    kmeans_model = joblib.load(os.path.join(BASE_PATH, "kmeans_garbage_model.pkl"))
-    scaler_model = joblib.load(os.path.join(BASE_PATH, "scaler_garbage_model.pkl"))
-    print("SVM pipeline loaded.")
+    print("SVM loaded")
 except Exception as e:
-    print("SVM load error:", e)
+    print("SVM error:", e)
+
+try:
+    pca_model = joblib.load(os.path.join(BASE_PATH, "pca_garbage_model.pkl"))
+    print("PCA loaded")
+except Exception as e:
+    print("PCA error:", e)
+
+try:
+    le_model = joblib.load(os.path.join(BASE_PATH, "le_garbage_model.pkl"))
+    print("LE loaded")
+except Exception as e:
+    print("LE error:", e)
+
+try:
+    kmeans_model = joblib.load(os.path.join(BASE_PATH, "kmeans_garbage_model.pkl"))
+    print("KMeans loaded")
+except Exception as e:
+    print("KMeans error:", e)
+
+try:
+    scaler_model = joblib.load(os.path.join(BASE_PATH, "scaler_garbage_model.pkl"))
+    print("Scaler loaded")
+except Exception as e:
+    print("Scaler error:", e)
+
 
 # LOAD PYTORCH MODEL
 net_model = None
@@ -87,10 +108,6 @@ try:
 
 except Exception as e:
     print(f"Net load error: {e}")
-
-print("Current dir:", os.getcwd())
-print("Files:", os.listdir())
-print("Model folder:", os.listdir("model"))
 
 # ORB
 orb = cv2.ORB_create(nfeatures=800)

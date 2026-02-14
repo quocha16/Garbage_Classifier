@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.13 (image_colorization)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.13.5 WSL (Ubuntu-24.04): (/home/quocha16/.virtualenvs/web/bin/python)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Classification" project-jdk-type="Python SDK" />
 </project>

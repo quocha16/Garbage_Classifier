@@ -214,6 +214,61 @@
             transition: all 0.5s ease;
         }
 
+        .model-selection {
+            margin-bottom: 20px;
+            background: var(--input-bg);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .model-label {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .switch-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .switch-container input[type="radio"] {
+            display: none; /* Ẩn nút radio mặc định */
+        }
+
+        .switch-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            background: var(--card-bg);
+            color: var(--text-sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .switch-btn:hover {
+            background: var(--border-color);
+        }
+
+        /* Hiệu ứng khi được chọn */
+        input[type="radio"]:checked + .switch-btn {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+        }
+
         .main-layout.has-results .info-panel {
             display: flex;
             opacity: 1;
@@ -407,9 +462,19 @@
                     <img id="imagePreview" src="#">
                 </div>
                 <input type="file" id="fileInput" accept="image/*" hidden>
+                <div class="model-selection">
+                    <p class="model-label">Select Model:</p>
+                    <div class="switch-container">
+                        <input type="radio" name="ai-model" id="mod_svm" value="svm" checked>
+                        <label for="mod_svm" class="switch-btn"> Tradition
+                        </label>
+                        <input type="radio" name="ai-model" id="mod_net" value="net">
+                        <label for="mod_net" class="switch-btn"> Improve
+                        </label>
+                    </div>
+                </div>
                 <button class="btn-primary" id="analyzeBtn">Analyze <i class="fas fa-search"></i></button>
             </section>
-
             <section class="panel info-panel" id="resultPanel">
                 <div class="result-header">
                     <h2 class="garbage-name" id="resLabel">--</h2>
@@ -417,7 +482,7 @@
                 </div>
 
                 <div class="prob-container">
-                    <h3><i class="fas fa-chart-bar"></i> Prediction Results (Click to choose another if the return result is not correct)</h3>
+                    <h3><i class="fas fa-chart-bar"></i> Prediction Results</h3>
                     <div id="top3List"></div>
                 </div>
 
@@ -532,9 +597,18 @@
 
         analyzeBtn.addEventListener('click', () => {
             if (!selectedFile) return alert("Please select an image first!");
+
+            //Lấy model đang được chọn
+            const selectedModel = document.querySelector('input[name="ai-model"]:checked').value;
+
             const formData = new FormData();
             formData.append('file', selectedFile);
-            analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+            //Gửi thêm tham số model_type xuống backend
+            formData.append('model_type', selectedModel);
+
+            //Cập nhật text nút bấm để người dùng biết đang chạy model nào
+            const modelName = selectedModel === 'svm' ? 'SVM' : 'Neural Net';
+            analyzeBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Running ${modelName}...`;
             analyzeBtn.disabled = true;
 
             fetch('/predict', { method: 'POST', body: formData })
@@ -542,26 +616,37 @@
                 .then(data => {
                     analyzeBtn.innerHTML = 'Analyze <i class="fas fa-search"></i>';
                     analyzeBtn.disabled = false;
+
                     if (data.error) return alert(data.error);
 
+                    //Phần xử lý hiển thị kết quả giữ nguyên như cũ ---
                     updateDisplayInfo(data.prediction);
 
+                    //Cập nhật danh sách top 3
                     topListContainer.innerHTML = '';
+                    //Thêm dòng thông báo nhỏ model nào đã được dùng
+                    const infoModel = document.createElement('div');
+                    infoModel.style.marginBottom = "10px";
+                    infoModel.style.fontSize = "0.8rem";
+                    infoModel.style.color = "var(--text-sub)";
+                    infoModel.innerHTML = `Result from: <strong>${data.model}</strong>`;
+                    topListContainer.appendChild(infoModel);
+
                     if (data.top_3) {
                         data.top_3.forEach((item, index) => {
                             const div = document.createElement('div');
                             div.className = 'prob-item' + (index === 0 ? ' active' : '');
-                            div.dataset.label = item.label;
+                            div.dataset.label = item.label; // Sửa lỗi cũ: item.label thay vì label_name
 
                             div.innerHTML = `
-                            <div class="prob-label">
-                                <span>${item.label.toUpperCase()}</span>
-                                <span>${item.confidence}%</span>
-                            </div>
-                            <div class="prob-bar-bg">
-                                <div class="prob-bar-fill" style="width: ${item.confidence}%"></div>
-                            </div>
-                        `;
+                                <div class="prob-label">
+                                    <span>${item.label.toUpperCase()}</span>
+                                    <span>${item.confidence}%</span>
+                                </div>
+                                <div class="prob-bar-bg">
+                                    <div class="prob-bar-fill" style="width: ${item.confidence}%"></div>
+                                </div>
+                            `;
 
                             div.addEventListener('click', () => {
                                 updateDisplayInfo(item.label);
@@ -572,7 +657,8 @@
                     }
                     mainLayout.classList.add('has-results');
                 })
-                .catch(() => {
+                .catch((err) => {
+                    console.error(err);
                     analyzeBtn.disabled = false;
                     analyzeBtn.innerHTML = 'Analyze <i class="fas fa-search"></i>';
                     alert("Connection error!");

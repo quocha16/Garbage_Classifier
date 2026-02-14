@@ -25,16 +25,19 @@ Users can upload an image via a web interface and select which model to use for 
 ## Dataset Structure
 Dataset source is provided in `dataset-source.txt`.
 The dataset contains the following labeled categories:
-    trash/<br>
-    shoes/<br>
-    plastic/<br>
-    paper/<br>
-    metal/<br>
-    glass/<br>
-    clothes/<br>
-    cardboard/<br>
-    biological/<br>
-    battery/<br>
+
+```
+    trash/
+    shoes/
+    plastic/
+    paper/
+    metal/
+    glass/
+    clothes/
+    cardboard/
+    biological/
+    battery/
+```
 
 ## Classical Machine Learning (SVM)
 

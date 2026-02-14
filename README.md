@@ -26,7 +26,7 @@ Users can upload an image via a web interface and select which model to use for 
 Dataset source is provided in `dataset-source.txt`.
 The dataset contains the following labeled categories:
 
-```
+```bash
     trash/
     shoes/
     plastic/

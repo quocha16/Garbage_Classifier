@@ -7,3 +7,10 @@ seaborn
 tqdm
 joblib
 gunicorn
+torch
+torchvision
+Pillow
+os
+glob
+random
+Image

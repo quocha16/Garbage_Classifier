@@ -22,6 +22,20 @@ Users can upload an image via a web interface and select which model to use for 
 
 # Model Architectures
 
+## Dataset Structure
+Dataset source is provided in `dataset-source.txt`.
+The dataset contains the following labeled categories:
+    trash/
+    shoes/
+    plastic/
+    paper/
+    metal/
+    glass/
+    clothes/
+    cardboard/
+    biological/
+    battery/
+
 ## Classical Machine Learning (SVM)
 
 This pipeline is built entirely from scratch using handcrafted features:
@@ -39,7 +53,6 @@ This pipeline is built entirely from scratch using handcrafted features:
 
 This approach emphasizes transparency and interpretability of the ML pipeline.
 
----
 
 ## Deep Learning Model (CNN)
 

@@ -72,7 +72,7 @@ This model learns features automatically instead of relying on handcrafted featu
 
 ## Web Interface Usage
 
-1.  Access the web interface at: 
+1.  Access the web interface at: garbageclassifier-production-f190.up.railway.app
   > *Note: The application is hosted on a free Render instance. It may take up to a minute to load initially while the server spins up from inactivity.*
 2.  Drag and drop an image, or click to upload.
 3.  Click **"Analyze"**

@@ -88,6 +88,10 @@ try:
 except Exception as e:
     print(f"Net load error: {e}")
 
+print("Current dir:", os.getcwd())
+print("Files:", os.listdir())
+print("Model folder:", os.listdir("model"))
+
 # ORB
 orb = cv2.ORB_create(nfeatures=800)
 

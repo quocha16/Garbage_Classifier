@@ -68,7 +68,7 @@ A convolutional neural network built using:
 This model learns features automatically instead of relying on handcrafted feature engineering.
 
 ### Performance:
-99% on Validation Set
+~97% on Validation Set
 
 ## Web Interface Usage
 

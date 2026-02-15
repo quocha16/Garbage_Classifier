@@ -10,3 +10,4 @@ tqdm
 gunicorn
 torch
 torchvision
+--extra-index-url https://download.pytorch.org/whl/cpu

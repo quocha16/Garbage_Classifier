@@ -90,6 +90,70 @@
             z-index: 10;
         }
 
+        /* --- STYLE CHO NÚT INFO MỚI --- */
+        .info-toggle {
+            position: absolute;
+            top: 55px; /* Nằm dưới nút theme (40px + 15px gap) */
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--tag-blue-text); /* Màu xanh cho nổi bật */
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            font-size: 1.1rem;
+            z-index: 10;
+        }
+
+        .info-toggle:hover {
+            transform: scale(1.1);
+            background: var(--border-color);
+        }
+
+        /* --- STYLE CHO MODAL INFO --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 15% auto;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 16px;
+            position: relative;
+            box-shadow: var(--shadow);
+            color: var(--text-main);
+        }
+
+        .close-btn {
+            color: var(--text-sub);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: var(--primary);
+        }
+        /* --------------------------- */
+
         header {
             text-align: center;
             margin-bottom: 40px;
@@ -444,13 +508,14 @@
     <div class="app-container">
         <button class="theme-toggle" id="themeBtn"><i class="fas fa-moon"></i></button>
 
+        <button class="info-toggle" id="infoBtn" title="About Project"><i class="fas fa-info"></i></button>
+
         <header>
             <h1><i class="fas fa-recycle"></i> Waste Classifier</h1>
-            <p>Upload an image to detect and learn how to dispose of waste properly.<br>
-                There is a high probability of errors, so please verify the returned result.<br>
-                Please refer to <a href="https://github.com/quocha16/Garbage_Classifier" target="_blank">Garbage Classifier</a> for more information about this project.</p>
+            <p>
+                <strong>Created by: アイン・クオック</strong>
+            </p>
         </header>
-
         <main class="main-layout" id="mainLayout">
             <section class="panel upload-panel">
                 <div class="upload-area" id="uploadArea">
@@ -515,6 +580,18 @@
         </main>
     </div>
 
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 style="margin-bottom: 15px; color: var(--primary);">About Project</h2>
+            <p>- This project aims to promote environmental awareness and correct recycling habits. Upload an image to automatically identify, classify, and receive guidelines on how to process or recycle waste properly.</p>
+            <p>- You can choose between two AI models: <strong>SVM</strong> (Classical Machine Learning) and <strong>CNN</strong> (Deep Learning). Due to limited server resources, the <strong>SVM</strong> model is optimized for speed and stability, whereas the <strong>CNN</strong> model is more resource-intensive.</p>
+            <p>-<strong> Disclaimer:</strong> AI predictions are for reference only and may contain errors. Please verify the waste type manually before disposal.</p>
+            <p>- For more information, you can view the source code at <a href="https://github.com/quocha16/Garbage_Classifier" target="_blank" style="color: var(--tag-blue-text);">Garbage Classifier</a>.</p>
+                        </div>
+        </div>
+    </div>
+
     <script>
         const garbageInfo = {
             'battery': { type: 'Hazardous', recycle: 'Special', fire: 'Yes', desc: 'AA, AAA, Lithium-ion batteries contain heavy metals.', action: 'DO NOT put in normal bin. Tape ends and take to E-waste drop-off.' },
@@ -537,6 +614,16 @@
         const themeBtn = document.getElementById('themeBtn');
         const topListContainer = document.getElementById('top3List');
         const htmlElement = document.documentElement;
+
+        // --- Info Modal Logic (MỚI THÊM) ---
+        const infoBtn = document.getElementById("infoBtn");
+        const infoModal = document.getElementById("infoModal");
+        const closeBtn = document.getElementsByClassName("close-btn")[0];
+
+        infoBtn.onclick = function() { infoModal.style.display = "block"; }
+        closeBtn.onclick = function() { infoModal.style.display = "none"; }
+        window.onclick = function(event) { if (event.target == infoModal) infoModal.style.display = "none"; }
+        // -----------------------------------
 
         // --- Theme Management ---
         const savedTheme = localStorage.getItem('theme') || 'light';

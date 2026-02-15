@@ -248,8 +248,4 @@ def predict():
 
 # MAIN
 if __name__ == "__main__":
-<<<<<<< HEAD
     app.run(debug=True)
-=======
-    app.run(debug=True)
->>>>>>> 2707eb4 (Update files)

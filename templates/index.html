@@ -90,6 +90,67 @@
             z-index: 10;
         }
 
+        .info-toggle {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--tag-blue-text);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            font-size: 1.1rem;
+            z-index: 10;
+        }
+
+        .info-toggle:hover {
+            transform: scale(1.1);
+            background: var(--border-color);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 15% auto;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 16px;
+            position: relative;
+            box-shadow: var(--shadow);
+            color: var(--text-main);
+        }
+
+        .close-btn {
+            color: var(--text-sub);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: var(--primary);
+        }
+
         header {
             text-align: center;
             margin-bottom: 40px;
@@ -212,61 +273,6 @@
             opacity: 0;
             transform: translateX(20px);
             transition: all 0.5s ease;
-        }
-
-        .model-selection {
-            margin-bottom: 20px;
-            background: var(--input-bg);
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        .model-label {
-            font-size: 0.85rem;
-            color: var(--text-sub);
-            margin-bottom: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .switch-container {
-            display: flex;
-            gap: 10px;
-        }
-
-        .switch-container input[type="radio"] {
-            display: none; /* Ẩn nút radio mặc định */
-        }
-
-        .switch-btn {
-            flex: 1;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            background: var(--card-bg);
-            color: var(--text-sub);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .switch-btn:hover {
-            background: var(--border-color);
-        }
-
-        /* Hiệu ứng khi được chọn */
-        input[type="radio"]:checked + .switch-btn {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
         }
 
         .main-layout.has-results .info-panel {
@@ -444,13 +450,14 @@
     <div class="app-container">
         <button class="theme-toggle" id="themeBtn"><i class="fas fa-moon"></i></button>
 
+        <button class="info-toggle" id="infoBtn" title="About Project"><i class="fas fa-info"></i></button>
+
         <header>
             <h1><i class="fas fa-recycle"></i> Waste Classifier</h1>
-            <p>Upload an image to detect and learn how to dispose of waste properly.<br>
-                There is a high probability of errors, so please verify the returned result.<br>
-                Please refer to <a href="https://github.com/quocha16/Garbage_Classifier" target="_blank">Garbage Classifier</a> for more information about this project.</p>
-        </header>
+            <p>
 
+            </p>
+        </header>
         <main class="main-layout" id="mainLayout">
             <section class="panel upload-panel">
                 <div class="upload-area" id="uploadArea">
@@ -462,19 +469,10 @@
                     <img id="imagePreview" src="#">
                 </div>
                 <input type="file" id="fileInput" accept="image/*" hidden>
-                <div class="model-selection">
-                    <p class="model-label">Select Model:</p>
-                    <div class="switch-container">
-                        <input type="radio" name="ai-model" id="mod_svm" value="svm" checked>
-                        <label for="mod_svm" class="switch-btn"> Classical SVM
-                        </label>
-                        <input type="radio" name="ai-model" id="mod_net" value="net">
-                        <label for="mod_net" class="switch-btn"> Neural Net
-                        </label>
-                    </div>
-                </div>
+
                 <button class="btn-primary" id="analyzeBtn">Analyze <i class="fas fa-search"></i></button>
             </section>
+
             <section class="panel info-panel" id="resultPanel">
                 <div class="result-header">
                     <h2 class="garbage-name" id="resLabel">--</h2>
@@ -515,6 +513,18 @@
         </main>
     </div>
 
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 style="margin-bottom: 15px; color: var(--primary);">About Project</h2>
+            <p>- This project aims to promote environmental awareness and correct recycling habits. Upload an image to automatically identify, classify, and receive guidelines on how to process or recycle waste properly.</p>
+            <p>- This system is powered by an advanced Deep Learning model to ensure high accuracy in garbage classification.</p>
+            <p>-<strong> Disclaimer:</strong> AI predictions are for reference only and may contain errors. Please verify the waste type manually before disposal.</p>
+            <p>- For more information, you can view the source code at <a href="https://github.com/quocha16/Garbage_Classifier" target="_blank" style="color: var(--tag-blue-text);">Garbage Classifier</a>.</p>
+            <p><strong>Created by: アイン・クオック</strong></p>
+        </div>
+    </div>
+
     <script>
         const garbageInfo = {
             'battery': { type: 'Hazardous', recycle: 'Special', fire: 'Yes', desc: 'AA, AAA, Lithium-ion batteries contain heavy metals.', action: 'DO NOT put in normal bin. Tape ends and take to E-waste drop-off.' },
@@ -538,7 +548,14 @@
         const topListContainer = document.getElementById('top3List');
         const htmlElement = document.documentElement;
 
-        // --- Theme Management ---
+        const infoBtn = document.getElementById("infoBtn");
+        const infoModal = document.getElementById("infoModal");
+        const closeBtn = document.getElementsByClassName("close-btn")[0];
+
+        infoBtn.onclick = function() { infoModal.style.display = "block"; }
+        closeBtn.onclick = function() { infoModal.style.display = "none"; }
+        window.onclick = function(event) { if (event.target == infoModal) infoModal.style.display = "none"; }
+
         const savedTheme = localStorage.getItem('theme') || 'light';
         applyTheme(savedTheme);
 
@@ -553,7 +570,6 @@
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             applyTheme(newTheme);
         });
-        // -------------------------
 
         let selectedFile = null;
 
@@ -598,17 +614,13 @@
         analyzeBtn.addEventListener('click', () => {
             if (!selectedFile) return alert("Please select an image first!");
 
-            //Lấy model đang được chọn
-            const selectedModel = document.querySelector('input[name="ai-model"]:checked').value;
-
             const formData = new FormData();
             formData.append('file', selectedFile);
-            //Gửi thêm tham số model_type xuống backend
-            formData.append('model_type', selectedModel);
 
-            //Cập nhật text nút bấm để người dùng biết đang chạy model nào
-            const modelName = selectedModel === 'svm' ? 'SVM' : 'Neural Net';
-            analyzeBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Running ${modelName}...`;
+            // Hardcode gửi model_type xuống backend phòng trường hợp backend vẫn yêu cầu tham số này
+            formData.append('model_type', 'net');
+
+            analyzeBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Analyzing...`;
             analyzeBtn.disabled = true;
 
             fetch('/predict', { method: 'POST', body: formData })
@@ -619,24 +631,24 @@
 
                     if (data.error) return alert(data.error);
 
-                    //Phần xử lý hiển thị kết quả giữ nguyên như cũ ---
                     updateDisplayInfo(data.prediction);
 
-                    //Cập nhật danh sách top 3
                     topListContainer.innerHTML = '';
-                    //Thêm dòng thông báo nhỏ model nào đã được dùng
-                    const infoModel = document.createElement('div');
-                    infoModel.style.marginBottom = "10px";
-                    infoModel.style.fontSize = "0.8rem";
-                    infoModel.style.color = "var(--text-sub)";
-                    infoModel.innerHTML = `Result from: <strong>${data.model}</strong>`;
-                    topListContainer.appendChild(infoModel);
+
+                    if (data.model) {
+                        const infoModel = document.createElement('div');
+                        infoModel.style.marginBottom = "10px";
+                        infoModel.style.fontSize = "0.8rem";
+                        infoModel.style.color = "var(--text-sub)";
+                        infoModel.innerHTML = `Result from: <strong>${data.model}</strong>`;
+                        topListContainer.appendChild(infoModel);
+                    }
 
                     if (data.top_3) {
                         data.top_3.forEach((item, index) => {
                             const div = document.createElement('div');
                             div.className = 'prob-item' + (index === 0 ? ' active' : '');
-                            div.dataset.label = item.label; // Sửa lỗi cũ: item.label thay vì label_name
+                            div.dataset.label = item.label;
 
                             div.innerHTML = `
                                 <div class="prob-label">

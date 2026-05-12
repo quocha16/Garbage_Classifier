@@ -45,7 +45,7 @@ class SimpleNet(nn.Module):
 
 try:
     checkpoint = torch.load(
-        os.path.join(BASE_PATH, "garbage_model.pth"),
+        os.path.join(BASE_PATH, "garbage_model_quantized.pth"),
         map_location="cpu"
     )
 

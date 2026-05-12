@@ -1,107 +1,113 @@
-# Garbage Classifier Project
+# About the Project
+This project focuses on Deep Learning-based waste classification using Computer Vision techniques and PyTorch.
 
-This project explores both Classical Machine Learning and Deep Learning approaches for real-world waste classification.
+It is designed as a practical learning project to explore how modern CNN architectures can solve real-world image classification problems and how trained models can be deployed through a web application.
 
-It is designed as a practical learning project that demonstrates:
+The project includes:
 
-- Feature engineering with traditional computer vision techniques
-- Classical ML pipeline construction
 - CNN-based image classification with PyTorch
-- Deployment via a Flask web interface
+- Transfer Learning using EfficientNet-B0
+- Model Quantization for lightweight deployment
+- Image preprocessing and augmentation
+- Flask web deployment (This part relies heavily on AI generation)
 
-#  Project Overview
+# Overview
 
-The goal of this project is to bridge theoretical Machine Learning knowledge with real-world implementation.
+The goal of this project is to bridge theoretical Deep Learning knowledge with real-world implementation while understanding how image classification systems are trained, evaluated, and deployed.
 
-Unlike many projects that rely purely on pre-trained deep models, this system implements two independent pipelines:
+The system allows users to upload an image through a web interface and receive predictions from the trained neural network model.
 
-1. **Classical ML Pipeline (SVM-based)**
-2. **Deep Learning Pipeline (CNN-based – EfficientNet-B0)**
+To make deployment feasible on low-resource environments and free hosting platforms, the model is optimized using quantization techniques to reduce memory usage and improve inference efficiency.
 
-Users can upload an image via a web interface and select which model to use for prediction.
-
-# Model Architectures
+# Model Architecture
 
 ## Dataset Structure
+
 Dataset source is provided in `dataset-source.txt`.
+
 The dataset contains the following labeled categories:
 
 ```bash
-    trash/
-    shoes/
-    plastic/
-    paper/
-    metal/
-    glass/
-    clothes/
-    cardboard/
-    biological/
-    battery/
+trash/
+shoes/
+plastic/
+paper/
+metal/
+glass/
+clothes/
+cardboard/
+biological/
+battery/
 ```
 
-## Classical Machine Learning (SVM)
+# Deep Learning Model (CNN)
 
-This pipeline is built entirely from scratch using handcrafted features:
-
-- ORB Feature Extraction
-- Bag of Visual Words (BoW)
-- K-Means Clustering (Visual Vocabulary)
-- Color Histogram Features
-- Feature Normalization (Scaler)
-- Dimensionality Reduction (PCA)
-- Support Vector Machine (SVM) Classifier
-
-### Performance:
-~60% on Test Set
-
-This approach emphasizes transparency and interpretability of the ML pipeline.
-
-
-## Deep Learning Model (CNN)
-
-A convolutional neural network built using:
+The classification model is built using:
 
 - EfficientNet-B0 architecture
+- Transfer Learning with PyTorch
 - Fully retrained classifier layer
 - Softmax output for multi-class prediction
+- Quantized model optimization for lightweight inference
 
-This model learns features automatically instead of relying on handcrafted feature engineering.
+Instead of relying on handcrafted feature engineering, the model automatically learns visual patterns and discriminative features directly from training images.
 
-### Performance:
-~97% on Test Set
+## Performance
 
-## Web Interface Usage
+- ~97% accuracy on Validation Set
 
-1.  Access the web interface at: garbageclassifier-production-f190.up.railway.app
-  > *Note: The application is hosted on a free host instance. It may take up to a minute to load initially while the server spins up from inactivity.*
-2.  Drag and drop an image, or click to upload.
-3.  Click **"Analyze"**
-4.  Wait for the processing pipeline to finish.
-5.  View the result (Users can select an alternative prediction if the current result is incorrect, as the system provides the top 3 probabilities).
+# Deployment Optimization
 
-## Requirements
+To support deployment on free-tier cloud hosting services with limited CPU and memory resources, the model uses quantization techniques.
 
-To run this project locally, ensure you have Python installed.
+Benefits include:
 
-1.  **Clone the repository:**
+- Reduced model size
+- Lower RAM consumption
+- Faster CPU inference
+- Better compatibility with free web hosting instances
 
-    ```bash
-    git clone https://github.com/quocha16/garbage-classifier.git
-    cd garbage-classifier
-    ```
-    
-3.  **Install dependencies:**
+This allows the application to run on lightweight environments such as Railway free instances without requiring GPU acceleration.
 
-    ```bash
-    pip install -r requirements.txt
-    ```
-  
-3.  **Run the application:**
+# Web Interface Usage
 
-    ```bash
-    python app.py
-    ```
-    
-## License
+1. Access the web interface at:
+
+    https://garbage-classifier-v85s.onrender.com
+
+> Note: The application is hosted on a free hosting instance. It may take up to a minute to load initially while the server spins up from inactivity.
+
+2. Drag and drop an image, or click to upload.
+
+3. Click **"Analyze"**
+
+4. Wait for the prediction process to finish.
+
+5. View the result and prediction probabilities.
+
+# Requirements
+
+To run this project locally, ensure Python is installed.
+
+## 1. Clone the repository
+
+```bash
+git clone https://github.com/quocha16/garbage-classifier.git
+cd garbage-classifier
+```
+
+## 2. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+## 3. Run the application
+
+```bash
+python app.py
+```
+
+# License
 
 This project is licensed under the **MIT License**.

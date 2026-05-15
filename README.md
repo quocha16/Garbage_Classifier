@@ -67,7 +67,7 @@ Benefits include:
 - Faster CPU inference
 - Better compatibility with free web hosting instances
 
-This allows the application to run on lightweight environments such as Railway free instances without requiring GPU acceleration.
+This allows the application to run on lightweight environments.
 
 # Web Interface Usage
 

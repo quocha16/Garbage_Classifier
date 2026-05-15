@@ -75,7 +75,8 @@ This allows the application to run on lightweight environments such as Railway f
 
     https://garbage-classifier-v85s.onrender.com
 
-> Note: The application is hosted on a free hosting instance. It may take up to a minute to load initially while the server spins up from inactivity.
+> Note: The application is hosted on a free hosting instance. It may take up to a minute to load initially while the server spins up from inactivity. <br>
+Currently, the model is too heavy for a free web hosting server. The project is being updated to be hosted on the cloud
 
 2. Drag and drop an image, or click to upload.
 

@@ -5,11 +5,11 @@ It is designed as a practical learning project to explore how modern CNN archite
 
 The project includes:
 
-- CNN-based image classification with PyTorch
-- Transfer Learning using EfficientNet-B0
-- Model Quantization for lightweight deployment
-- Image preprocessing and augmentation
-- Flask web deployment (This part relies heavily on AI generation)
+CNN-based image classification with PyTorch
+Transfer Learning using EfficientNet-B0
+Model Quantization for lightweight deployment
+Image preprocessing and augmentation
+Flask web deployment 
 
 # Overview
 
@@ -44,30 +44,15 @@ battery/
 
 The classification model is built using:
 
-- EfficientNet-B0 architecture
-- Transfer Learning with PyTorch
-- Fully retrained classifier layer
-- Softmax output for multi-class prediction
-- Quantized model optimization for lightweight inference
-
-Instead of relying on handcrafted feature engineering, the model automatically learns visual patterns and discriminative features directly from training images.
+EfficientNet-B0 architecture
+Transfer Learning with PyTorch
+Fully retrained classifier layer
+Softmax output for multi-class prediction
+Quantized model optimization for lightweight inference
 
 ## Performance
 
 - ~97% accuracy on Validation Set
-
-# Deployment Optimization
-
-To support deployment on free-tier cloud hosting services with limited CPU and memory resources, the model uses quantization techniques.
-
-Benefits include:
-
-- Reduced model size
-- Lower RAM consumption
-- Faster CPU inference
-- Better compatibility with free web hosting instances
-
-This allows the application to run on lightweight environments.
 
 # Web Interface Usage
 

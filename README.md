@@ -9,14 +9,6 @@ The system allows users to upload an image through a web interface and receive p
 
 To make deployment feasible on low-resource environments and free hosting platforms, the model is optimized using quantization techniques to reduce memory usage and improve inference efficiency.
 
-The project includes:
-
-- CNN-based image classification with PyTorch
-- Transfer Learning using EfficientNet-B0
-- Model Quantization for lightweight deployment
-- Image preprocessing and augmentation
-- Flask web deployment 
-
 ## Dataset Structure
 
 Dataset source is provided in `dataset-source.txt`.

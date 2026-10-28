@@ -3,6 +3,12 @@ This project focuses on Deep Learning-based waste classification using Computer 
 
 It is designed as a practical learning project to explore how modern CNN architectures can solve real-world image classification problems and how trained models can be deployed through a web application.
 
+# Overview
+
+The system allows users to upload an image through a web interface and receive predictions from the trained neural network model.
+
+To make deployment feasible on low-resource environments and free hosting platforms, the model is optimized using quantization techniques to reduce memory usage and improve inference efficiency.
+
 The project includes:
 
 - CNN-based image classification with PyTorch
@@ -10,14 +16,6 @@ The project includes:
 - Model Quantization for lightweight deployment
 - Image preprocessing and augmentation
 - Flask web deployment 
-
-# Overview
-
-The goal of this project is to bridge theoretical Deep Learning knowledge with real-world implementation while understanding how image classification systems are trained, evaluated, and deployed.
-
-The system allows users to upload an image through a web interface and receive predictions from the trained neural network model.
-
-To make deployment feasible on low-resource environments and free hosting platforms, the model is optimized using quantization techniques to reduce memory usage and improve inference efficiency.
 
 # Model Architecture
 

@@ -17,8 +17,6 @@ The project includes:
 - Image preprocessing and augmentation
 - Flask web deployment 
 
-# Model Architecture
-
 ## Dataset Structure
 
 Dataset source is provided in `dataset-source.txt`.
